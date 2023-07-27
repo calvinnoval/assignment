@@ -19,7 +19,7 @@ To complete this assignment, you will need the following:
 1. A Google Cloud Platform (GCP) account with access to BigQuery and Dataproc services.
 2. Google Cloud SDK installed on your local machine to interact with GCP services.
 3. Python installed on your local machine.
-4. A sample dataset that you want to process using SQL and Python.
+4. A sample `employees.csv` and `timesheets.csv` file that you want to process using SQL and Python.
 
 ## Instructions
 Follow the steps below to complete the assignment:
@@ -32,17 +32,31 @@ Follow the steps below to complete the assignment:
    - Use the BigQuery console or command-line tools to create a new dataset to store the processed data.
 
 3. **Import Data into BigQuery**
-   - Upload or import your sample dataset into BigQuery. You can use the console, command-line tools, or Python libraries for this task.
+   - Upload sample file given into BigQuery. You can use `main.py` for this task.
 
 4. **Write SQL Queries**
-   - Use BigQuery's SQL syntax to write queries that process and analyze your data. Save these queries as `.py` files in the `assignment/` folder.
+   - Use BigQuery's SQL syntax to write queries that extract load transform your data into data warehouse.
+   - Prepare table data warehouse with name `fact_detail_salary` to store daily snapshot <br />
+    <br />
+    <details><summary>DDL table</summary>  <br />
+      CREATE TABLE `{project_id}.{dataset_id}.fact_detail_salary` <br />
+      ( <br />
+         year	INTEGER <br />
+       , month	INTEGER	<br />			
+       , branch_id	INTEGER	<br />			
+       , salary_per_hour	FLOAT	<br />				
+       , snapshot_date	DATE	<br />
+      ) <br />
+      PARTITION BY snapshot_date <br />
+      CLUSTER BY branch_id, year, month
+   </details> 
 
-5. **Submit Python Job to Dataproc**
+6. **Submit Python Job to Dataproc**
    - Write Python code to process the data further.
    - Save the Python script as `main.py` in the `assignment/` folder.
 
-6. **Finalize and Submit**
+7. **Finalize and Submit**
    - Ensure your code is well-documented and any specific instructions are provided in the `README.md` file.
 
-7. **Expected Result**
+8. **Expected Result**
    - Expected result store to `fact_detail_salary.csv`
